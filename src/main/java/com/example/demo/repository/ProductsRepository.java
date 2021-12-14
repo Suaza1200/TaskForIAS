@@ -6,7 +6,7 @@ import java.util.List;
 
 public interface ProductsRepository {
     List<Products> list();
-    Products findByld (String id);
+    Products findById (String id);
 
     void create (Products products);
 

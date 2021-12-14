@@ -7,14 +7,13 @@ import org.springframework.web.bind.annotation.*;
 import java.util.List;
 
 @RestController
-@RequestMapping("/products")
-
+@RequestMapping(value = "/products")
 public class Controllers {
 private ProductsRepository repository;
 
 public Controllers(ProductsRepository repository) {this.repository = repository;}
 
-@GetMapping
+    @GetMapping
     public List<Products> listProducts() { return  repository.list();}
 
     @PostMapping
@@ -31,25 +30,25 @@ public Controllers(ProductsRepository repository) {this.repository = repository;
     public Products getPerson(
             @PathVariable("id") String productsId
     ) {
-        return repository.findByld(productsId);
+        return repository.findById(productsId);
     }
 
     @DeleteMapping(value = "/{id}")
-    public Products deletePerson(
+    public Products deleteProducts(
             @PathVariable("id") String productsId
     ) {
-        Products foundProducts = repository.findByld(productsId);
+        Products foundProducts = repository.findById(productsId);
         repository.delete(productsId);
         return foundProducts;
     }
 
     @PutMapping(value = "/{id}")
-    public Products updatePerson(
+    public Products updateProducts(
             @PathVariable("id") String productsId,
             @RequestBody Products products
     ) {
         repository.update(productsId, products);
 
-        return repository.findByld(productsId);
+        return repository.findById(productsId);
     }
 }

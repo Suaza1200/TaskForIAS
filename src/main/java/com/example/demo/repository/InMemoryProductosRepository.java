@@ -1,11 +1,12 @@
 package com.example.demo.repository;
 
 import com.example.demo.domain.Products;
+import org.springframework.context.annotation.Primary;
 import org.springframework.stereotype.Component;
 
 import java.util.*;
 
-@Component
+// @Component
 public class InMemoryProductosRepository implements ProductsRepository {
     private final Map<String, Products> database = new HashMap<>();
 
@@ -17,7 +18,7 @@ public class InMemoryProductosRepository implements ProductsRepository {
     }
 
     @Override
-    public Products findByld(String id) {
+    public Products findById(String id) {
         return database.get(id);
     }
 
@@ -44,8 +45,9 @@ public class InMemoryProductosRepository implements ProductsRepository {
     public void delete(String id) {
         Products foundProducts = database.get(id);
         if (foundProducts == null){
-            throw new IllegalArgumentException("Produducts with id:" + "not found");
+            throw new IllegalArgumentException("Products with id:" + "not found");
         }
+        database.remove(id);
 
     }
 }

@@ -4,19 +4,19 @@ package com.example.demo.domain;
 public class Products {
     private String id;
     private String name;
-    private float price;
+    private String price;
 
-    public Products(String id, String name, float price) {
+
+    public Products(String id, String name, String price) {
         this.id = id;
         this.name = name;
         this.price = price;
     }
 
-    public Products() {
-    }
+
 
     public String getId() {
-        return id;
+        return id = id;
     }
 
     public void setId(String id) {
@@ -31,11 +31,11 @@ public class Products {
         this.name = name;
     }
 
-    public float getPrice() {
+    public String getPrice() {
         return price;
     }
 
-    public void setPrice(float price) {
+    public void setPrice(String price) {
         this.price = price;
     }
 
