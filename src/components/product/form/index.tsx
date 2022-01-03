@@ -33,7 +33,7 @@ function ProductForm() {
     formValues: FormValues,
     helpers: FormikHelpers<FormValues>
   ) => {
-    await productsClient.createProduct(formValues);
+    await personsClient.createProduct(formValues);
 
     helpers.resetForm({
       values: initialValues,
