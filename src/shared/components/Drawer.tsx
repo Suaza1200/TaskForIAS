@@ -1,5 +1,7 @@
 import Inventory2Icon from '@mui/icons-material/Inventory2';
-import { Divider } from '@mui/material';
+import MonetizationOnIcon from '@mui/icons-material/MonetizationOn';
+import RemoveShoppingCartIcon from '@mui/icons-material/RemoveShoppingCart';
+import { Button, Divider, Typography } from '@mui/material';
 import Box from '@mui/material/Box';
 import Drawer from '@mui/material/Drawer';
 import List from '@mui/material/List';
@@ -23,24 +25,31 @@ export default function CustomDrawer({ open, setOpen }: any) {
       onClick={() => setOpen(!open)}
     >
       <List>
+        <Typography variant="h6" component="div">Shopping car</Typography>
         {cart.map((product: Product, index: number) => (
           <ListItem button key={index}>
             <ListItemIcon>
               <Inventory2Icon />
             </ListItemIcon>
             <ListItemText primary={product.name} />
-            <ListItemText style={{visibility: "hidden"}} primary={total += product.price} />
+            <ListItemText style={{ visibility: "hidden" }} primary={total += product.price} />
           </ListItem>
         ))}
         <Divider />
         <ListItem button>
           <ListItemIcon>
-            <Inventory2Icon />
+            <MonetizationOnIcon />
           </ListItemIcon>
           <ListItemText primary={total} />
-        </ListItem>
-      </List>
-    </Box>
+          <Button onClick={() => {
+            localStorage.clear();
+            window.location.reload()
+          }}>
+          <RemoveShoppingCartIcon />
+        </Button>
+      </ListItem>
+    </List>
+    </Box >
   );
 
   return (
