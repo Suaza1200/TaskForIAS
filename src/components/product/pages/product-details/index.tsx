@@ -1,6 +1,6 @@
 import { useParams } from "react-router-dom";
 
-function EditProductPage() {
+function ProductDetail() {
   const params = useParams();
   return (
     <pre>
@@ -9,4 +9,4 @@ function EditProductPage() {
   );
 }
 
-export default EditProductPage;
+export default ProductDetail;

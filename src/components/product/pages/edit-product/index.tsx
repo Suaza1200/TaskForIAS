@@ -1,9 +1,10 @@
+import React from 'react'
+import { useLocation, useNavigate } from 'react-router';
 import Button from "@mui/material/Button";
 import TextField from "@mui/material/TextField";
 import { Formik, FormikHelpers } from "formik";
-import { useNavigate } from "react-router-dom";
 import * as yup from "yup";
-import personsClient from "../api";
+import personsClient from "../../api";
 
 const validationSchema = yup.object({
   price: yup.number().positive("el numero debe ser positivo").min(1).required("Requerido"),
@@ -11,8 +12,8 @@ const validationSchema = yup.object({
     .string()
     .required("Requerido")
     .matches(/^[a-zA-Z\s:]{2,64}$/, "Nombre inválido"),
-  description: yup.string().required("Requerido"), 
-  quantity: yup.number().positive("el numero debe ser positivo").max(100).min(1).required("Requerido")  
+  description: yup.string().required("Requerido"),
+  quantity: yup.number().positive("el numero debe ser positivo").max(100).min(1).required("Requerido")
 });
 
 type FormValues = {
@@ -29,14 +30,16 @@ const initialValues: FormValues = {
   quantity: null,
 };
 
-function ProductForm() {
+
+export default function EditProduct() {
   const navigate = useNavigate();
+  const data: any = useLocation();
 
   const handleSubmit = async (
     formValues: FormValues,
     helpers: FormikHelpers<FormValues>
   ) => {
-    await personsClient.createProduct(formValues);
+    await personsClient.updateProduct(data.state.id, formValues);
 
     helpers.resetForm({
       values: initialValues,
@@ -47,7 +50,7 @@ function ProductForm() {
 
   return (
     <Formik<FormValues>
-      initialValues={initialValues}
+      initialValues={data.state}
       onSubmit={handleSubmit}
       validationSchema={validationSchema}
     >
@@ -122,5 +125,3 @@ function ProductForm() {
     </Formik>
   );
 }
-
-export default ProductForm;
